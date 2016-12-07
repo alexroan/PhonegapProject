@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>I'm a Tourist!</title>
+    <!-- See http://code.google.com/p/html5shiv/ 
+    HTML5shiv is a library to enable all new HTML5 elements and sectioning in IE 8 and earlier -->
+    <!--[if lt IE 9]>
+    <script src="html5shiv.js" type="text/javascript" ></script>
+    <![endif]-->
+    <link href="lib/jqm/jquery.mobile-1.2.0.css" rel="stylesheet" type="text/css"/>
+    
+    <!-- Include basic structural CSS first, that is mobile focused -->
+    <link rel="stylesheet" type="text/css" href="css/conference-mobile-first.css"/>
+    <link rel="stylesheet" type="text/css" href="css/conference-mid-size-screens.css"
+          media="all and (min-width: 527px) and (max-width: 684px)"/>
+    <link rel="stylesheet" type="text/css" href="css/conference-large-screens.css"
+          media="all and (min-width: 685px)"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Deal with IE 8 and earlier, which don't support media queries. Unfortunately,
+         there is nothing in these IE conditionals that allow us to also test for
+         browser window size so we just bring in support for large screens. We
+         could get round this with some Javascript, BUT the JS could be turned off too. -->
+    <!--[if (lt IE 9)&(!IEMobile)]>
+    <link rel="stylesheet" type="text/css" href="css/conference-large-screens.css" media="all"/>
+    <![endif]-->
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script src="lib/jq/jquery-1.8.2.js" type="text/javascript"></script>
+    <script src="phonegap.js" type="text/javascript"></script>
+    <script src="lib/yqlgeo/yqlgeo.js"></script>
+    <script src="app/DataContext.js" type="text/javascript"></script>
+    <script src="app/Controller.js" type="text/javascript" ></script>
+    <script src="lib/jqm/jquery.mobile-1.2.0.js" type="text/javascript"></script>
+    <script src="http://192.168.1.3:8080/target/target-script-min.js#anonymous"></script>
+
+    <script type="text/javascript">
+        function list_item_clicked(num){
+            //var debug = document.querySelector('#visitsdebug');
+            //debug.innerHTML = num;
+            var detailslabel = document.querySelector('#visitdetailslabel');
+            detailslabel.innerHTML = num;
+            document.location.href = "#visitdetails";
+        }
+    </script>
+
+</head>
+
+<body>
+
+<article id="visits" role="document" aria-live="assertive" aria-atomic="true" data-role="page" data-title="Visits">
+    <header class="page_header" role="banner" data-role="header" data-theme="b" data-position="fixed">
+        <div class="logo">
+            <img src="logo.jpg" alt="I'm a Tourist!"/>
+        </div>
+
+        <div>
+            <h1>I'm a Tourist!</h1>
+        </div>
+    </header>
+
+    <section data-role="content" id="visits-list-content" class="indexPos">
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed">
+        <nav data-role="navbar">
+            <ul>
+                <li>
+                    <a class="ui-btn-active ui-state-persist" data-role="tab" data-icon="sessions">Visits</a>
+                </li>
+                <li>
+                    <a href="#map" data-role="tab" data-icon="map">Map</a>
+                </li>
+                <li>
+                    <a href="#camera" data-role="tab" data-icon="house">Camera</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+
+</article>
+
+
+<article id="map" role="document" aria-live="assertive" aria-atomic="true" data-role="page">
+   <header id="maptitle" class="page_header" role="banner" data-role="header" data-theme="b" data-position="fixed">
+        <header class="logo">
+            <img src="logo.jpg" alt="I'm a Tourist!"/>
+        </header>
+
+			 <div>
+        			<h1>I'm a Tourist!</h1>
+        </div>
+    </header>
+    
+    <section id="mapPos" role="application" data-role="content">
+        <!-- Content is dynamically added -->
+        <div id="mapdiv" style="width: 500px; height: 400px; background-color: gray;">
+
+        </div>
+    </section>
+    
+    <footer id="mapfooter" data-role="footer" data-position="fixed">
+        <nav data-role="navbar">
+            <ul>
+                <li>
+                    <a data-icon="sessions" href="#visits" data-role="tab">Vists</a>
+                </li>
+                <li>
+                    <a class="ui-btn-active ui-state-persist" data-icon="map" data-role="tab">Map</a>
+                </li>
+                <li>
+                    <a href="#camera" data-role="tab" data-icon="house">Camera</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+  
+</article>
+
+<article id="camera" role="document" aria-live="assertive" aria-atomic="true" data-role="page">
+    <header id="cameratitle" class="page_header" role="banner" data-role="header" data-theme="b" data-position="fixed">
+        <header class="logo">
+            <img src="logo.jpg" alt="The conference home page logo"/>
+        </header>
+
+        <div>
+            <h1>I'm a Tourist!</h1>
+        </div>
+    </header>
+
+    <section id="cameraPos" role="application" data-role="content">
+        <div id="newcamerainput">
+            <video id="camvideo"></video>
+            <button id="takephoto">Take Photo</button>
+            <canvas id="camcanvas"></canvas>
+        </div>
+        <div id="phonecamerainput">
+            <button id="phoneopencamera">Open Camera</button>
+        </div>
+        <div id="cameraresults">
+            <img src="#" id="camphoto" alt="photo" />
+            <input type="text" name="title" id="title" value="" placeholder="Title" />
+            <input type="text" name="notes" id="notes" value="" placeholder="Notes" />
+            <label id="debuglabel"></label>
+            <label id="debuglabel2"></label>
+            <button id="savevisit">Save Visit</button>
+        </div>
+    </section>
+
+    <footer id="camerafooter" data-role="footer" data-position="fixed">
+        <nav data-role="navbar">
+            <ul>
+                <li>
+                    <a data-icon="sessions" href="#visits" data-role="tab">Vists</a>
+                </li>
+                <li>
+                    <a href="#map" data-icon="map" data-role="tab">Map</a>
+                </li>
+                <li>
+                    <a class="ui-btn-active ui-state-persist" data-role="tab" data-icon="house">Camera</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+</article>
+
+<article id="visitdetails" role="document" aria-live="assertive" aria-atomic="true" data-role="page">
+    <header id="visittitle" class="page_header" role="banner" data-role="header" data-theme="b" data-position="fixed">
+        <header class="logo">
+            <img src="logo.jpg" alt="I'm a Tourist!"/>
+        </header>
+
+        <div>
+            <h1>I'm a Tourist!</h1>
+        </div>
+    </header>
+
+    <section id="visitpos" role="application" data-role="content">
+        <div>
+            <label id="visitdetailslabel">DEFAULT</label>
+            <p>
+                <label id="visitdetailstitle"></label>
+            </p>
+            <p>
+                <label id="visitdetailsnotes"></label>
+            </p>
+            <p>
+                <label id="visitdetailsdate"></label>
+            </p>
+            <p>
+                <img  id="visitdetailsimg" src="#" />
+            </p>
+
+        </div>
+    </section>
+
+    <footer id="visitfooter" data-role="footer" data-position="fixed">
+        <nav data-role="navbar">
+            <ul>
+                <li>
+                    <a class="ui-btn-active ui-state-persist" data-icon="sessions" href="#visits" data-role="tab">Vists</a>
+                </li>
+                <li>
+                    <a href="#map" data-icon="map" data-role="tab">Map</a>
+                </li>
+                <li>
+                    <a href="#camera" data-role="tab" data-icon="house">Camera</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+</article>
+
+</body>
+</html>

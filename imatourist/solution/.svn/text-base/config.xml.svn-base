@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This is the root element containing XML schema namespace settings, a unique
+	id for this application (use reverse domain name to ensure unique) and a
+	version attribute to identify the version of this app on PhoneGap Build. The
+	versionCode attribute is optional and is Android specific: it's the version number
+	shown on the Google Play store.
+-->
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap="http://phonegap.com/ns/1.0"
+        id="uk.ac.aber.dcs.cwl.conference"
+        versionCode="1"
+        version="1.0.0">
+  <!-- 
+	  The name and description are used in the PhoneGap Build website
+  -->
+  <name>Conference Browser</name>
+
+  <description>Browse conference sessions and discover venues</description>
+
+	<!--
+		Identifies the author and their contact details. The email is displayed on the
+		PhoneGap Build website
+	-->
+  <author href="http://users.aber.ac.uk/cwl"
+          email="cwl@aber.ac.uk">
+    Chris Loftus
+  </author>
+
+  <gap:platforms>
+    <gap:platform name="android" minVersion="2.1"/>
+    <gap:platform name="webos"/>
+    <gap:platform name="symbian.wrt"/>
+    <gap:platform name="blackberry" project="widgets"/>
+  </gap:platforms>
+
+  <!-- 
+     We can specify the icons to use for different platforms. In this case we
+     have only included the Android icons (for the launcher screen) and at
+     four levels of resolution so that the correct version will be used depending
+     on the device screen. Note that PhoneGap will also look for a default icon
+     in the project's top level folder called icon.png.
+  --> 
+  <icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+  <icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+  <icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+  <icon src="icons/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+
+	<!--
+		An example of a preference setting. This preference will prevent landscape mode.
+		By default both orientations are allowed.
+	-->
+  <preference name="orientation" value="portrait"/>
+
+	<!--
+		Use the following if you want a launch splash screen to appear briefly
+	-->
+  <!--
+  <gap:splash src="icons/splash/splash2x.png" width="640" height="960"/>
+  <gap:splash src="icons/splash/splash.png" width="320" height="480"/>
+  -->
+
+	<!--
+		For each kind of mobile service required we add a plugin element. PhoneGap (Cordova)
+		provides an API that enables access to many kinds of services: see 
+		http://docs.phonegap.com/en/2.3.0/index.html
+		Here are some examples (although in our app we don't use any)
+	-->
+  <plugin name="Geolocation" value="org.apache.cordova.GeoBroker"/>
+  <!--
+  <plugin name="Device" value="org.apache.cordova.Device" />
+  <plugin name="Capture" value="org.apache.cordova.Capture"/>
+  <plugin name="Storage" value="org.apache.cordova.Storage" />
+  -->
+
+
+
+</widget>
